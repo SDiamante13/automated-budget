@@ -1,15 +1,12 @@
 package tech.pathtoprogramming.budget.auth;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import tech.pathtoprogramming.budget.model.ExchangeRequest;
-
-import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @Slf4j
@@ -34,10 +31,11 @@ public class AuthController {
     }
 
     @PostMapping("/exchange-token")
-    public void access(HttpServletResponse response, @RequestBody ExchangeRequest exchangeRequest, Model model) throws Exception {
+    public ModelAndView access(@RequestBody ExchangeRequest exchangeRequest) throws Exception {
         String accessToken = authService.getAccessToken(exchangeRequest.publicToken());
-        model.addAttribute("accessToken", accessToken);
-        response.sendRedirect("/transactions");
+        ModelAndView modelAndView = new ModelAndView("redirect:/transactions");
+        modelAndView.addObject("accessToken", accessToken);
+        return modelAndView;
     }
 
 }
