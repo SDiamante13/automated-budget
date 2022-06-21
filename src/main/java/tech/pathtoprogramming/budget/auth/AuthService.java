@@ -33,11 +33,11 @@ public class AuthService {
     String getAccessToken(String publicToken) throws Exception {
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-                .POST(HttpRequest.BodyPublishers.ofString("{" +
-                        "\"client_id\": \"" + authProperties.id() + "\"," +
-                        "\"secret\": \"" + authProperties.secret() + "\"," +
-                        "\"public_token\": \"" + publicToken + "\"\n" +
-                        "}"))
+                .POST(HttpRequest.BodyPublishers.ofString("{"
+                        + "\"client_id\": \"" + authProperties.id() + "\","
+                        + "\"secret\": \"" + authProperties.secret() + "\","
+                        + "\"public_token\": \"" + publicToken + "\"\n"
+                        + "}"))
                 .uri(new URI(authProperties.url() + "/item/public_token/exchange"))
                 .build();
         HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
@@ -50,17 +50,17 @@ public class AuthService {
     public String getLinkToken() throws Exception {
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-                .POST(HttpRequest.BodyPublishers.ofString("{" +
-                        "\"client_id\": \"" + authProperties.id() + "\",\n" +
-                        "\"secret\": \"" + authProperties.secret() + "\",\n" +
-                        "\"client_name\": \"Automated Budget App\",\n" +
-                        "\"country_codes\": [\"US\"],\n" +
-                        "\"products\": [\"transactions\"],\n" +
-                        "\"language\": \"en\",\n" +
-                        "\"user\": {\n" +
-                        "\"client_user_id\": \"" + authProperties.id() + "\"\n" +
-                        "}\n" +
-                        "}"))
+                .POST(HttpRequest.BodyPublishers.ofString("{"
+                        + "\"client_id\": \"" + authProperties.id() + "\",\n"
+                        + "\"secret\": \"" + authProperties.secret() + "\",\n"
+                        + "\"client_name\": \"Automated Budget App\",\n"
+                        + "\"country_codes\": [\"US\"],\n"
+                        + "\"products\": [\"transactions\"],\n"
+                        + "\"language\": \"en\",\n"
+                        + "\"user\": {\n"
+                        + "\"client_user_id\": \"" + authProperties.id() + "\"\n"
+                        + "}\n"
+                        + "}"))
                 .uri(new URI(authProperties.url() + "/link/token/create"))
                 .build();
         HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());

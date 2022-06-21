@@ -17,8 +17,8 @@ public class AccessTokenDTO {
 
     @Override
     public String toString() {
-        return "AccessTokenDTO{" +
-                "accessToken='" + accessToken + '\'' +
-                '}';
+        return "AccessTokenDTO{"
+                + "accessToken='" + accessToken + '\''
+                + '}';
     }
 }

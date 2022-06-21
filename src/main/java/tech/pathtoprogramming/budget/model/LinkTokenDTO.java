@@ -17,8 +17,8 @@ public class LinkTokenDTO {
 
     @Override
     public String toString() {
-        return "LinkTokenDTO{" +
-                "linkToken='" + linkToken + '\'' +
-                '}';
+        return "LinkTokenDTO{"
+                + "linkToken='" + linkToken + '\''
+                + '}';
     }
 }
