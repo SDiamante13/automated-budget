@@ -1,0 +1,40 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'checkstyle'
+}
+
+group 'tech.pathtoprogramming'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '18'
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation 'com.plaid:plaid-java:11.5.0'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task checkstyle {
+    dependsOn 'checkstyleTest'
+    dependsOn 'checkstyleMain'
+    tasks.findByName('checkstyleMain').mustRunAfter 'checkstyleTest'
+}

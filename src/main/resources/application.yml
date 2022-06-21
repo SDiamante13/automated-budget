@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: secret
+plaid:
+  client:
+    id:
+    secret:
+    url:
